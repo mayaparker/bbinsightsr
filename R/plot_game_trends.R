@@ -35,6 +35,7 @@
 #' )
 #'
 #' # Example 2: Plot without date (user selects game if multiple exist)
+#' \dontrun{
 #' plot_game_trends(
 #'   games      = usu_data,
 #'   home_team  = "Utah State",
@@ -42,6 +43,7 @@
 #'   game_break = "half",
 #'   stat       = "rebounds"
 #' )
+#' }
 plot_game_trends <- function(
     games,
     home_team,
@@ -58,40 +60,40 @@ plot_game_trends <- function(
 ) {
   game_break <- match.arg(game_break)
   stat       <- match.arg(stat)
-  
+
   selected_game <- select_single_game(
     data      = games,
     team      = home_team,
     opponent  = away_team,
     game_date = game_date
   )
-  
+
   segmented_game <- assign_game_breaks(
     game_data  = selected_game,
     segment_by = game_break,
     num_breaks = num_breaks
   )
-  
+
   summary_data <- summarize_segmented_data(
     segmented_game = segmented_game,
     stat           = stat
   )
-  
+
   break_label <- if (game_break == "num_breaks" && !is.null(num_breaks)) {
     paste0(num_breaks, " Time Segments")
   } else {
     tools::toTitleCase(game_break)
   }
-  
+
   game_day <- unique(selected_game$date)
   if (length(game_day) > 1) game_day <- game_day[1]
-  
+
   title_text <- paste0(
     tools::toTitleCase(stat), " by ", break_label, " for ",
     home_team, " vs ", away_team,
     " on ", format(as.Date(game_day), "%B %d, %Y")
   )
-  
+
   plot_stat_by_segment(summary_data) +
     ggplot2::ggtitle(title_text)
 }

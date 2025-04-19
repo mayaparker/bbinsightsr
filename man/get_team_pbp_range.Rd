@@ -9,9 +9,9 @@ get_team_pbp_range(team, start_year = NULL, end_year = NULL, seasons = NULL)
 \arguments{
 \item{team}{Character. Team name (e.g., "Utah State").}
 
-\item{start_year}{Integer (optional). Start of range, e.g., 2020 for 2020–21.}
+\item{start_year}{Integer (optional). Start of range, e.g., 2020 for 2020-21.}
 
-\item{end_year}{Integer (optional). End of range, e.g., 2023 for 2023–24.}
+\item{end_year}{Integer (optional). End of range, e.g., 2023 for 2023-24.}
 
 \item{seasons}{Optional vector of season inputs like 2021, "2020-2021", or "22".}
 }

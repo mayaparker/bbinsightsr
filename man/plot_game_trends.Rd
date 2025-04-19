@@ -55,6 +55,7 @@ plot_game_trends(
 )
 
 # Example 2: Plot without date (user selects game if multiple exist)
+\dontrun{
 plot_game_trends(
   games      = usu_data,
   home_team  = "Utah State",
@@ -62,4 +63,5 @@ plot_game_trends(
   game_break = "half",
   stat       = "rebounds"
 )
+}
 }

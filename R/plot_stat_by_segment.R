@@ -17,8 +17,11 @@
 #' @importFrom tidyr pivot_longer
 #' @importFrom ggplot2 ggplot aes geom_col scale_fill_manual geom_vline
 #'   scale_y_continuous labs theme_bw theme element_text element_blank
+#'   position_dodge2 margin
 #' @importFrom stringr str_replace_all
 #' @importFrom tools toTitleCase
+#' @importFrom stats setNames
+#' @importFrom utils tail
 plot_stat_by_segment <- function(summary_data) {
   # 1. Pull out team names from the summary
   home_team <- unique(summary_data$home)[1]
