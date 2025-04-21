@@ -107,7 +107,8 @@ ft_stadium <- function(df, home_team, arena) {
     )
 
   # Print summary
-  print(glue::glue("Free Throw Summary: {home_team} (Home) vs All Opponents (Away)"))
+  print(glue::glue("Free Throw Summary: {home_team} (Home) vs All Opponents
+                   (Away)"))
   print(ft_wide)
 
   # Run t-test for away team (1st vs 2nd half)
@@ -119,6 +120,7 @@ ft_stadium <- function(df, home_team, arena) {
     cat("\nT-test for Away Team FT% (1st vs 2nd Half):\n")
     print(t_test_result)
   } else {
-    cat("\nT-test for Away Team could not be run (all free throws in same half).\n")
+    cat("\nT-test for Away Team could not be run
+        (all free throws in same half).\n")
   }
 }

@@ -1,14 +1,17 @@
 #' Plot a Team Statistic by Game Segment (Internal)
 #'
-#' Creates a bar plot showing the values of a selected stat for both teams across game segments.
-#' Automatically uses team colors and abbreviates game break labels using a dictionary and color lookup tables.
+#' Creates a bar plot showing the values of a selected stat for both teams
+#' across game segments. Automatically uses team colors and abbreviates game
+#' break labels using a dictionary and color lookup tables.
 #'
 #' This function is intended for internal use and is not exported.
 #'
-#' @param summary_data A data frame produced by `summarize_segmented_data()`, containing
-#'   game segment IDs, labels, and stat values (`home_stat`, `away_stat`) for both teams.
+#' @param summary_data A data frame produced by `summarize_segmented_data()`,
+#'   containing game segment IDs, labels, and stat values
+#'   (`home_stat`, `away_stat`) for both teams.
 #'
-#' @return A ggplot2 object showing the stat values across game segments, color-coded by team.
+#' @return A ggplot2 object showing the stat values across game segments,
+#'   color-coded by team.
 #'
 #' @keywords internal
 #'
@@ -51,16 +54,20 @@ plot_stat_by_segment <- function(summary_data) {
 
   # 4. Replace team names in game_break_label with abbreviations
   summary_data <- summary_data %>%
-    mutate(game_break_label = stringr::str_replace_all(game_break_label, abbrv_lookup)) %>%
-    mutate(game_break_label = gsub("Official TV Timeout", "TV Timeout", game_break_label, fixed = TRUE))
+    mutate(game_break_label = stringr::str_replace_all(game_break_label,
+                                                       abbrv_lookup)) %>%
+    mutate(game_break_label = gsub("Official TV Timeout", "TV Timeout",
+                                   game_break_label, fixed = TRUE))
 
   # 5. Identify stat we're plotting
   stat_name <- unique(summary_data$stat)[1]
 
   # 6. Pivot to long format
   plot_df <- summary_data %>%
-    select(segment_id, segment_label = game_break_label, home, away, home_stat, away_stat) %>%
-    pivot_longer(c(home_stat, away_stat), names_to = "side", values_to = "value") %>%
+    select(segment_id, segment_label = game_break_label, home, away, home_stat,
+           away_stat) %>%
+    pivot_longer(c(home_stat, away_stat),
+                 names_to = "side", values_to = "value") %>%
     mutate(
       team = if_else(side == "home_stat", home, away),
       team = factor(team, levels = teams),
@@ -74,7 +81,8 @@ plot_stat_by_segment <- function(summary_data) {
   )
 
   # Replace white bars with gray fallback
-  team_colors <- ifelse(toupper(team_colors) == "#FFFFFF", "#A2AAAD", team_colors)
+  team_colors <- ifelse(toupper(team_colors) == "#FFFFFF", "#A2AAAD",
+                        team_colors)
   names(team_colors) <- c(home_team, away_team)
 
   # 8. Final plot

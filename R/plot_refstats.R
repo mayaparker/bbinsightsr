@@ -12,12 +12,14 @@ utils::globalVariables(c(
 #' Plot Referee Summary Statistics
 #'
 #' This function creates and displays three visualizations for referee stats:
-#' fouls per game, fouls on team vs opponent, and the foul ratio. Designed to work
-#' directly with the output of `refstats()`.
+#' fouls per game, fouls on team vs opponent, and the foul ratio. Designed to
+#' work directly with the output of `refstats()`.
 #'
-#' @param ref_stats A data frame created by `refstats()` containing referee summary statistics.
+#' @param ref_stats A data frame created by `refstats()` containing referee
+#'   summary statistics.
 #' @param top_n Number of top referees to include in each plot.
-#' @param team_label A string to label your team in the chart title (e.g., "Utah State").
+#' @param team_label A string to label your team in the chart title
+#'   (e.g., "Utah State").
 #'
 #' @return A combined plot displaying all three referee charts using patchwork.
 #' @export
@@ -32,13 +34,15 @@ plot_refstats <- function(ref_stats, top_n = 5, team_label = "Team") {
   p3 <- plot_team_foul_ratio(ref_stats, top_n)
 
   patchwork::wrap_plots(p1, p2, p3, ncol = 1) +
-    patchwork::plot_annotation(title = paste("Referee Summary Plots -", team_label))
+    patchwork::plot_annotation(title = paste("Referee Summary Plots -",
+                                             team_label))
 }
 
 
 #' Plot total fouls per game by referee
 #'
-#' Helper function that visualizes the top referees by average fouls called per game.
+#' Helper function that visualizes the top referees by average fouls called per
+#'   game.
 #'
 #' @param foul_stats A data frame generated from `refstats()`.
 #' @param top_n Number of top referees to display in the plot.
@@ -48,7 +52,8 @@ plot_refstats <- function(ref_stats, top_n = 5, team_label = "Team") {
 plot_fouls <- function(foul_stats, top_n = 5) {
   foul_stats |>
     dplyr::slice_max(fouls_per_game, n = top_n) |>
-    ggplot2::ggplot(ggplot2::aes(x = reorder(referee, fouls_per_game), y = fouls_per_game)) +
+    ggplot2::ggplot(ggplot2::aes(x = reorder(referee, fouls_per_game),
+                                 y = fouls_per_game)) +
     ggplot2::geom_col(fill = "steelblue") +
     ggplot2::coord_flip() +
     ggplot2::labs(
@@ -61,8 +66,8 @@ plot_fouls <- function(foul_stats, top_n = 5) {
 
 #' Plot team vs opponent foul counts
 #'
-#' Helper function to generate a bar chart comparing fouls called on the team vs. opponent
-#' for each referee.
+#' Helper function to generate a bar chart comparing fouls called on the team
+#'   vs. opponent for each referee.
 #'
 #' @param ref_stats A data frame generated from `refstats()`.
 #' @param top_n Number of top referees to include based on total foul counts.
@@ -77,11 +82,13 @@ plot_team_fouls <- function(ref_stats, top_n = 5) {
       cols = c(fouls_on_team, fouls_on_opponent),
       names_to = "foul_type", values_to = "count"
     ) |>
-    ggplot2::ggplot(ggplot2::aes(x = reorder(referee, count), y = count, fill = foul_type)) +
+    ggplot2::ggplot(ggplot2::aes(x = reorder(referee, count), y = count,
+                                 fill = foul_type)) +
     ggplot2::geom_col(position = "dodge") +
     ggplot2::coord_flip() +
     ggplot2::scale_fill_manual(
-      values = c("fouls_on_team" = "steelblue", "fouls_on_opponent" = "firebrick"),
+      values = c("fouls_on_team" = "steelblue",
+                 "fouls_on_opponent" = "firebrick"),
       labels = c("On Opponent", "On Team")
     ) +
     ggplot2::labs(
@@ -95,7 +102,8 @@ plot_team_fouls <- function(ref_stats, top_n = 5) {
 
 #' Plot foul ratio by referee
 #'
-#' Helper function to visualize the ratio of fouls called on the team versus the opponent.
+#' Helper function to visualize the ratio of fouls called on the team versus
+#' the opponent.
 #'
 #' @param ref_stats A data frame generated from `refstats()`.
 #' @param top_n Number of top referees to display by foul ratio.
@@ -106,7 +114,8 @@ plot_team_foul_ratio <- function(ref_stats, top_n = 5) {
   ref_stats |>
     dplyr::filter(!is.na(fouls_ratio)) |>
     dplyr::slice_max(fouls_ratio, n = top_n) |>
-    ggplot2::ggplot(ggplot2::aes(x = reorder(referee, fouls_ratio), y = fouls_ratio)) +
+    ggplot2::ggplot(ggplot2::aes(x = reorder(referee, fouls_ratio),
+                                 y = fouls_ratio)) +
     ggplot2::geom_col(fill = "darkorange") +
     ggplot2::geom_hline(yintercept = 1, linetype = "dashed", color = "gray40") +
     ggplot2::coord_flip() +

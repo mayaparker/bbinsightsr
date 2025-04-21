@@ -1,19 +1,112 @@
 ---
-title: "bbinsightsr"
-output: rmarkdown::html_vignette
+title: "Exploring NCAA Referee and Game Trends with `bbinsightsR`"
+author: "Maya Parker, Bradford Rasmussen, Dallin Wilson"
+output: pdf_document
 vignette: >
-  %\VignetteIndexEntry{bbinsightsr}
+  %\VignetteIndexEntry{Using the bbinsightsR Package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+# Overview
+
+The `bbinsightsR` package provides analytical tools to explore NCAA basketball play-by-play data with a specific focus on referee behavior, team momentum, and free throw performance. This package was developed as part of a course project and builds on top of the `ncaahoopR` package by introducing more granular summaries and visualizations for team and referee trends.
+
+This vignette introduces the main functionality and demonstrates typical workflows for analyzing game data, referee tendencies, and free throw accuracy over game segments.
+
+> GitHub Repository: <https://github.com/mayaparker/bbinsightsr>
+
+# Installation
+
+Install the development version from GitHub using `pak`:
+
+``` r
+# install.packages("pak")
+pak::pak("mayaparker/bbinsightsr")
+```
+
+# Load the Package
+
+``` r
+library(bbinsightsR)
+```
+
+# Dataset Overview
+
+The package includes `usu_data`, a dataset containing five seasons of play-by-play data for Utah State men’s basketball games. 
+
+``` r
+head(usu_data)
+```
+# Referee Analysis
+
+## Generate Referee Statistics
+
+You can use `refstats()` to analyze individual referee behavior based on fouls and calls involving a specific team:
+
+``` r
+stats <- refstats(usu_data, team_name = "Utah State")
+head(stats)
+```
+
+## Visualize Referee Tendencies
+
+The `plot_refstats()` function can be used to visualize the most active referees and how they interact with your team of interest:
+
+``` r
+plot_refstats(stats, top_n = 5, team_label = "Utah State")
+```
+
+# Free Throw Analysis
+
+## Opponent Comparison
+
+Analyze free throw accuracy by half for two specific teams:
+
+
+``` r
+ft_opponent(
+  df = usu_data,
+  home_team = "Utah State",
+  away_team = "Boise St",
+  arena = "Dee Glen Smith Spectrum"
+)
+
+```
+## Arena-Based Analysis
+
+Assess home and opponent free throw trends at a given arena:
+
+
+``` r
+
+ft_stadium(
+  df = usu_data,
+  home_team = "Utah State",
+  arena = "Dee Glen Smith Spectrum"
 )
 ```
 
-```{r setup}
-library(bbinsightsR)
+# Game Trends
+
+Use `plot_game_trends()` to visualize scoring or stat patterns across game segments like timeouts:
+
+``` r
+plot_game_trends(
+  games      = usu_data,
+  home_team  = "Utah State",
+  away_team  = "Wyoming",
+  game_break = "timeout",
+  stat       = "points",
+  game_date  = "2023-01-10"
+)
 ```
+
+# Conclusion
+
+The `bbinsightsR` package supports advanced play-by-play data analysis for NCAA basketball, offering new perspectives on referee patterns, free throw trends, and momentum swings. These tools can assist analysts, researchers, and fans in extracting meaningful insights from game data.
+
+# About
+
+This package was created by Maya Parker, Bradford Rasmussen, and Dallin Wilson for STAT 5555/6555 at Utah State University. It is licensed under GPL-3.
+

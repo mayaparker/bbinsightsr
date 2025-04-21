@@ -119,7 +119,8 @@ ft_opponent <- function(df, home_team, away_team, arena) {
       cat("\nT-test for", team, "(1st vs 2nd Half FT%):\n")
       print(t_test)
     } else {
-      cat("\nT-test for", team, "could not be run (all free throws in same half).\n")
+      cat("\nT-test for", team, "could not be run
+          (all free throws in same half).\n")
     }
   }
 

@@ -1,9 +1,12 @@
 Package: bbinsightsR
-Title: What the Package Does (One Line, Title Case)
+Title: NCAA Feferee and Momentum Insights
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+    person("Dallin", "Wilson", , "mayaziggy@gmail.com", role = c("aut", "cre"))
+Description: Provides helper functions and visualizations for analyzing NCAA 
+    basketball play-by-play data. Extends the functionality of the 'ncaahoopR' 
+    package to explore in-game trends, referee behavior, free throw patterns, 
+    and team momentum using ESPN-sourced data.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

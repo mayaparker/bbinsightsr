@@ -2,10 +2,11 @@
 
 #' Utah State University Basketball Play-by-Play Data
 #'
-#' A cleaned dataset containing play-by-play events for Utah State men's basketball
-#' games from the past five seasons, scraped from ESPN. It includes information about
-#' scores, fouls, referees, win probability, shot locations, and more for each play.
-#' The data can be used for referee analysis, in-game trends, and outcome modeling.
+#' A cleaned dataset containing play-by-play events for Utah State men's
+#' basketball games from the past five seasons, scraped from ESPN. It includes
+#' information about scores, fouls, referees, win probability, shot locations,
+#' and more for each play. The data can be used for referee analysis, in-game
+#' trends, and outcome modeling.
 #'
 #' @format A data frame with 54,048 rows and 40 columns:
 #' \describe{
@@ -59,21 +60,26 @@
 
 #' NCAA Team ID Table (from ncaahoopR)
 #'
-#' A lookup table of ESPN team IDs and URL fragments for use with the `ncaahoopR` package.
+#' A lookup table of ESPN team IDs and URL fragments for use with the
+#'   `ncaahoopR` package.
 #'
 #' @docType data
 #' @format A data frame with 4 columns:
 #' \describe{
-#'   \item{team}{The name of the team to be supplied to functions in `ncaahoopR`}
+#'   \item{team}{The name of the team to be supplied to functions in
+#'     `ncaahoopR`}
 #'   \item{id}{Team ID used in ESPN URLs}
 #'   \item{link}{URL slug for the team on ESPN}
 #'   \item{espn_abbrv}{Team abbreviation on ESPN (used in URLs)}
 #' }
 #'
 #' @details
-#' This table helps identify and correctly format ESPN play-by-play scraping requests.
+#' This table helps identify and correctly format ESPN play-by-play scraping
+#' requests.
 #'
-#' @source Extracted from the [`ncaahoopR`](https://github.com/lbenz730/ncaahoopR) package by Luke Benz.
+#' @source Extracted from
+#'   the [`ncaahoopR`](https://github.com/lbenz730/ncaahoopR) package by
+#'   Luke Benz.
 #' @examples
 #' data(ids)
 #' head(ids)
@@ -81,7 +87,8 @@
 
 #' Team Name Conversion Dictionary (from ncaahoopR)
 #'
-#' A lookup table of team name formats across major NCAA basketball data sources.
+#' A lookup table of team name formats across major NCAA basketball data
+#'   sources.
 #'
 #' @docType data
 #' @format A data frame with 9 columns:
@@ -100,7 +107,9 @@
 #' @details
 #' Useful for converting team names between different systems and data sources.
 #'
-#' @source Extracted from the [`ncaahoopR`](https://github.com/lbenz730/ncaahoopR) package by Luke Benz.
+#' @source Extracted from
+#'   the [`ncaahoopR`](https://github.com/lbenz730/ncaahoopR) package by
+#'   Luke Benz.
 #' @examples
 #' data(dict)
 #' head(dict)
@@ -108,7 +117,8 @@
 
 #' NCAA Team Color Reference Table (from ncaahoopR)
 #'
-#' A dataset of NCAA team branding colors, including primary, secondary, and tertiary hex values.
+#' A dataset of NCAA team branding colors, including primary, secondary,
+#' and tertiary hex values.
 #'
 #' @docType data
 #' @format A data frame with 11 columns:
@@ -129,7 +139,8 @@
 #' @details
 #' Helpful for consistent and branded data visualizations.
 #'
-#' @source Extracted from the [`ncaahoopR`](https://github.com/lbenz730/ncaahoopR) package by Luke Benz.
+#' @source Extracted from the
+#' [`ncaahoopR`](https://github.com/lbenz730/ncaahoopR) package by Luke Benz.
 #' @examples
 #' data(ncaa_colors)
 #' head(ncaa_colors)

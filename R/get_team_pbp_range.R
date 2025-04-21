@@ -1,14 +1,17 @@
 #' Pull play-by-play data for a team across multiple seasons
 #'
-#' This helper wraps `ncaahoopR::get_pbp()` to collect multiple seasons of data for a single team.
+#' This helper wraps `ncaahoopR::get_pbp()` to collect multiple seasons of data
+#' for a single team.
 #' It allows flexible season inputs and provides clean console feedback.
 #'
 #' @param team Character. Team name (e.g., "Utah State").
 #' @param start_year Integer (optional). Start of range, e.g., 2020 for 2020-21.
 #' @param end_year Integer (optional). End of range, e.g., 2023 for 2023-24.
-#' @param seasons Optional vector of season inputs like 2021, "2020-2021", or "22".
+#' @param seasons Optional vector of season inputs like 2021, "2020-2021",
+#'   or "22".
 #'
-#' @return A data frame combining play-by-play data for the given team and seasons.
+#' @return A data frame combining play-by-play data for the given team and
+#'   seasons.
 #' @examples
 #' \dontrun{
 #'   # Pull Wyoming games from the 2020–21 to 2022–23 seasons
@@ -48,7 +51,9 @@ get_team_pbp_range <- function(team,
       } else if (grepl("^\\d{2}$", s)) {
         # e.g., "21" to "2021-22"
         assumed <- c(assumed, s)
-        parsed <- c(parsed, paste0("20", s, "-", formatC(as.numeric(s) + 1, width = 2, flag = "0")))
+        parsed <- c(parsed, paste0("20", s, "-", formatC(as.numeric(s) + 1,
+                                                         width = 2,
+                                                         flag = "0")))
       } else if (grepl("^\\d{4}-\\d{2}$", s)) {
         # e.g., already in "2020-21" format
         parsed <- c(parsed, s)
@@ -57,19 +62,21 @@ get_team_pbp_range <- function(team,
       }
     }
 
-    return(list(parsed = parsed, assumed = assumed))
+    list(parsed = parsed, assumed = assumed)
   }
 
   # --- Build season list ---
   if (!is.null(start_year) && !is.null(end_year)) {
-    if (!is.numeric(start_year) || !is.numeric(end_year) || start_year > end_year) {
+    if (!is.numeric(start_year) || !is.numeric(end_year) ||
+          start_year > end_year) {
       stop("Please provide valid numeric start and end years.")
     }
     raw_seasons <- start_year:end_year
   } else if (!is.null(seasons)) {
     raw_seasons <- seasons
   } else {
-    stop("You must supply either start_year and end_year, or a vector of seasons.")
+    stop("You must supply either start_year and end_year,
+         or a vector of seasons.")
   }
 
   # --- Parse seasons and confirm with user ---
@@ -84,7 +91,8 @@ get_team_pbp_range <- function(team,
   if (tolower(confirm) != "y") stop("Aborted by user.")
 
   if (length(assumed_inputs) > 0) {
-    warning("Shorthand inputs assumed: ", paste(assumed_inputs, collapse = ", "))
+    warning("Shorthand inputs assumed: ",
+            paste(assumed_inputs, collapse = ", "))
   }
 
   # --- Pull and combine PBP data ---

@@ -1,12 +1,15 @@
 #' Select a Single Game Between Two Teams
 #'
-#' Filters a dataset of play-by-play data to return a single game between the specified teams.
-#' If multiple games are found and no `game_date` is specified or matched, the user will be prompted to select one.
+#' Filters a dataset of play-by-play data to return a single game between the
+#' specified teams. If multiple games are found and no `game_date` is specified
+#' or matched, the user will be prompted to select one.
 #'
-#' @param data A data frame containing play-by-play or game-level data, including `home`, `away`, `date`, and `game_id` columns.
+#' @param data A data frame containing play-by-play or game-level data,
+#' including `home`, `away`, `date`, and `game_id` columns.
 #' @param team The name of one team.
 #' @param opponent The name of the opposing team.
-#' @param game_date Optional. A specific game date (string or Date) to automatically select a game if it exists.
+#' @param game_date Optional. A specific game date (string or Date) to
+#' automatically select a game if it exists.
 #'
 #' @return A data frame containing the filtered game data for the selected game.
 #' @keywords internal
@@ -15,7 +18,8 @@
 #' @importFrom utils flush.console
 select_single_game <- function(data, team, opponent, game_date = NULL) {
   game_matches <- data %>%
-    dplyr::filter((home == team & away == opponent) | (home == opponent & away == team)) %>%
+    dplyr::filter((home == team & away == opponent) |
+                    (home == opponent & away == team)) %>%
     dplyr::arrange(date, game_id)
 
   if (nrow(game_matches) == 0) {
@@ -34,12 +38,15 @@ select_single_game <- function(data, team, opponent, game_date = NULL) {
 
     if (nrow(date_filtered) == 1) {
       message(
-        "Game automatically selected: ", date_filtered$home[1], " vs ", date_filtered$away[1],
+        "Game automatically selected: ", date_filtered$home[1], " vs ",
+        date_filtered$away[1],
         " on ", format(as.Date(date_filtered$date[1]), "%b %d, %Y")
       )
-      return(game_matches %>% dplyr::filter(game_id == date_filtered$game_id[1]))
+      return(game_matches %>% dplyr::filter(game_id ==
+                                              date_filtered$game_id[1]))
     } else {
-      message("No game found on ", as.character(game_date), " between these teams.")
+      message("No game found on ", as.character(game_date),
+              " between these teams.")
       message("Available dates:")
       for (i in seq_len(nrow(unique_games))) {
         cat(i, ": ", unique_games$home[i], " vs ", unique_games$away[i],
@@ -61,11 +68,14 @@ select_single_game <- function(data, team, opponent, game_date = NULL) {
 
   repeat {
     flush.console()
-    selected_index <- as.integer(readline(prompt = "Enter the number of the game you'd like to use: "))
-    if (!is.na(selected_index) && selected_index >= 1 && selected_index <= nrow(unique_games)) {
+    selected_index <- as.integer(readline(prompt = "Enter the number of the
+                                          game you'd like to use: "))
+    if (!is.na(selected_index) && selected_index >= 1 && selected_index <=
+          nrow(unique_games)) {
       break
     }
-    cat("Invalid selection. Please enter a number between 1 and ", nrow(unique_games), ".\n", sep = "")
+    cat("Invalid selection. Please enter a number between 1 and ",
+        nrow(unique_games), ".\n", sep = "")
   }
 
   selected_game_id <- unique_games$game_id[selected_index]
@@ -73,7 +83,8 @@ select_single_game <- function(data, team, opponent, game_date = NULL) {
 
   message(
     "You selected: ", unique_games$home[selected_index], " vs ",
-    unique_games$away[selected_index], " on ", unique_games$date_label[selected_index]
+    unique_games$away[selected_index], " on ",
+    unique_games$date_label[selected_index]
   )
 
   return(selected_game)

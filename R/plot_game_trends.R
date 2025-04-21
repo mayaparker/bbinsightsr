@@ -1,20 +1,26 @@
 #' Plot Game Trends by Segment
 #'
-#' Plots a selected statistic (e.g., points, fouls, turnovers) for a single game between two teams,
-#' segmented by timeouts, halves, or a user-specified number of breaks.
+#' Plots a selected statistic (e.g., points, fouls, turnovers) for a single game
+#'  between two teams, segmented by timeouts, halves, or a user-specified number
+#'   of breaks.
 #'
 #' @param games A data frame of play-by-play data for one or more games.
 #' @param home_team A string giving the home team's full name.
 #' @param away_team A string giving the away team's full name.
-#' @param game_break A string indicating the segmentation method. One of `"timeout"`, `"half"`, or `"num_breaks"`.
+#' @param game_break A string indicating the segmentation method. One of
+#'   `"timeout"`, `"half"`, or `"num_breaks"`.
 #' @param stat The statistic to plot. One of:
 #'   \code{"points"}, \code{"fouls"}, \code{"assists"}, \code{"shots_made"},
 #'   \code{"shots_total"}, \code{"threes_made"}, \code{"threes_total"},
 #'   \code{"turnovers"}, \code{"steals"}, \code{"offensive_rebounds"},
 #'   \code{"defensive_rebounds"}, \code{"rebounds"},
-#'   \code{"fg_made"}, \code{"3pt_made"}, \code{"fg_attempts"}, \code{"3pt_attempts"}.
-#' @param num_breaks (Optional) Integer. Required only if `game_break = "num_breaks"`. Specifies how many evenly spaced segments to create.
-#' @param game_date (Optional) A string (format: `"YYYY-MM-DD"`) to identify a specific game when multiple matchups exist between the teams.
+#'   \code{"fg_made"}, \code{"3pt_made"}, \code{"fg_attempts"},
+#'   \code{"3pt_attempts"}.
+#' @param num_breaks (Optional) Integer. Required only if
+#'   `game_break = "num_breaks"`. Specifies how many evenly spaced segments to
+#'   create.
+#' @param game_date (Optional) A string (format: `"YYYY-MM-DD"`) to identify a
+#'   specific game when multiple matchups exist between the teams.
 #'
 #' @return A \link[ggplot2]{ggplot} object showing the chosen stat by segment.
 #'
