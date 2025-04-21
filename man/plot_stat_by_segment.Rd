@@ -7,15 +7,18 @@
 plot_stat_by_segment(summary_data)
 }
 \arguments{
-\item{summary_data}{A data frame produced by \code{summarize_segmented_data()}, containing
-game segment IDs, labels, and stat values (\code{home_stat}, \code{away_stat}) for both teams.}
+\item{summary_data}{A data frame produced by \code{summarize_segmented_data()},
+containing game segment IDs, labels, and stat values
+(\code{home_stat}, \code{away_stat}) for both teams.}
 }
 \value{
-A ggplot2 object showing the stat values across game segments, color-coded by team.
+A ggplot2 object showing the stat values across game segments,
+color-coded by team.
 }
 \description{
-Creates a bar plot showing the values of a selected stat for both teams across game segments.
-Automatically uses team colors and abbreviates game break labels using a dictionary and color lookup tables.
+Creates a bar plot showing the values of a selected stat for both teams
+across game segments. Automatically uses team colors and abbreviates game
+break labels using a dictionary and color lookup tables.
 }
 \details{
 This function is intended for internal use and is not exported.

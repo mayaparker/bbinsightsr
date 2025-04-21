@@ -19,13 +19,16 @@ A data frame with 9 columns:
 }
 }
 \source{
-Extracted from the \href{https://github.com/lbenz730/ncaahoopR}{\code{ncaahoopR}} package by Luke Benz.
+Extracted from
+the \href{https://github.com/lbenz730/ncaahoopR}{\code{ncaahoopR}} package by
+Luke Benz.
 }
 \usage{
 dict
 }
 \description{
-A lookup table of team name formats across major NCAA basketball data sources.
+A lookup table of team name formats across major NCAA basketball data
+sources.
 }
 \details{
 Useful for converting team names between different systems and data sources.

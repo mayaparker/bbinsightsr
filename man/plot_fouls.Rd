@@ -15,5 +15,6 @@ plot_fouls(foul_stats, top_n = 5)
 A ggplot object.
 }
 \description{
-Helper function that visualizes the top referees by average fouls called per game.
+Helper function that visualizes the top referees by average fouls called per
+game.
 }

@@ -21,13 +21,15 @@ A data frame with 11 columns:
 }
 }
 \source{
-Extracted from the \href{https://github.com/lbenz730/ncaahoopR}{\code{ncaahoopR}} package by Luke Benz.
+Extracted from the
+\href{https://github.com/lbenz730/ncaahoopR}{\code{ncaahoopR}} package by Luke Benz.
 }
 \usage{
 ncaa_colors
 }
 \description{
-A dataset of NCAA team branding colors, including primary, secondary, and tertiary hex values.
+A dataset of NCAA team branding colors, including primary, secondary,
+and tertiary hex values.
 }
 \details{
 Helpful for consistent and branded data visualizations.

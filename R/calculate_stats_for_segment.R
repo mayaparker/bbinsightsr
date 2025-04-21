@@ -18,10 +18,12 @@
 #'   }
 #'
 #' @return A one-row data frame containing:
-#'   \item{`game_id`, `date`, `home`, `away`, `segment_id`}
-#'     {Basic game identifiers.}
-#'   \item{`game_break`, `game_break_label`}
-#'     {Break indicators and labels for plotting.}
+#'   \item{`game_id`, `date`, `home`, `away`, `segment_id`}{
+#'     Basic game identifiers.
+#'   }
+#'   \item{`game_break`, `game_break_label`}{
+#'     Break indicators and labels for plotting.
+#'   }
 #'   \item{`home_stat`, `away_stat`}{Calculated stat for each team.}
 #'   \item{`stat`}{The name of the stat that was computed.}
 #'

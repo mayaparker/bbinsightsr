@@ -7,19 +7,22 @@
 select_single_game(data, team, opponent, game_date = NULL)
 }
 \arguments{
-\item{data}{A data frame containing play-by-play or game-level data, including \code{home}, \code{away}, \code{date}, and \code{game_id} columns.}
+\item{data}{A data frame containing play-by-play or game-level data,
+including \code{home}, \code{away}, \code{date}, and \code{game_id} columns.}
 
 \item{team}{The name of one team.}
 
 \item{opponent}{The name of the opposing team.}
 
-\item{game_date}{Optional. A specific game date (string or Date) to automatically select a game if it exists.}
+\item{game_date}{Optional. A specific game date (string or Date) to
+automatically select a game if it exists.}
 }
 \value{
 A data frame containing the filtered game data for the selected game.
 }
 \description{
-Filters a dataset of play-by-play data to return a single game between the specified teams.
-If multiple games are found and no \code{game_date} is specified or matched, the user will be prompted to select one.
+Filters a dataset of play-by-play data to return a single game between the
+specified teams. If multiple games are found and no \code{game_date} is specified
+or matched, the user will be prompted to select one.
 }
 \keyword{internal}

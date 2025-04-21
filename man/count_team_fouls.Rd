@@ -19,14 +19,16 @@ count_team_fouls(
 
 \item{home_col}{Column name for the home team name.}
 
-\item{action_team_col}{Column name indicating whether the action was by "home" or "away".}
+\item{action_team_col}{Column name indicating whether the action was by
+"home" or "away".}
 
 \item{team_name}{Name of the team to analyze (e.g., "Utah State").}
 }
 \value{
-A data frame with referee, fouls_on_team, fouls_on_opponent, and fouls_ratio.
+A data frame with referee, fouls_on_team, fouls_on_opponent, and
+fouls_ratio.
 }
 \description{
-Helper function to calculate how many fouls each referee called against a specified team
-and against the opposing team, along with the foul ratio.
+Helper function to calculate how many fouls each referee called against a
+specified team and against the opposing team, along with the foul ratio.
 }

@@ -11,7 +11,8 @@ summarize_segmented_data(segmented_game, stat = "points")
 with columns \code{segment_id}, \code{game_break}, and \code{game_break_label}
 as added by \code{assign_game_breaks()}.}
 
-\item{stat}{A character string indicating which stat to compute. Options include:
+\item{stat}{A character string indicating which stat to compute. Options
+include:
 \itemize{
 \item \code{"points"}, \code{"fouls"}, \code{"assists"}, \code{"turnovers"}, \code{"steals"}
 \item \code{"offensive_rebounds"}, \code{"defensive_rebounds"}, \code{"rebounds"}
@@ -21,13 +22,16 @@ as added by \code{assign_game_breaks()}.}
 \value{
 A data frame with one row per segment, containing:
 \item{\code{game_id}, \code{date}, \code{home}, \code{away}}{Basic game identifiers.}
-\item{\code{segment_id}, \code{game_break}, \code{game_break_label}}{Segment and label info.}
+\item{\code{segment_id}, \code{game_break}, \code{game_break_label}}{
+Segment and label info.
+}
 \item{\code{home_stat}, \code{away_stat}}{Values of the chosen stat for each team.}
 \item{\code{stat}}{The name of the stat that was computed.}
 }
 \description{
-Takes a play-by-play data frame that has been run through \code{assign_game_breaks()},
-splits it into segments, computes a stat for each segment and team, and returns
+Takes a play-by-play data frame that has been run through
+\code{assign_game_breaks()}, splits it into segments, computes a stat for each
+segment and team, and returns
 the ready-to-plot summary.
 }
 \details{

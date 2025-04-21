@@ -15,6 +15,6 @@ plot_team_fouls(ref_stats, top_n = 5)
 A ggplot object.
 }
 \description{
-Helper function to generate a bar chart comparing fouls called on the team vs. opponent
-for each referee.
+Helper function to generate a bar chart comparing fouls called on the team
+vs. opponent for each referee.
 }

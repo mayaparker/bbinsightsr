@@ -19,24 +19,29 @@ refstats(
 
 \item{ref_col}{Column name containing referee names (separated by "/").}
 
-\item{foul_col}{Column name indicating whether the row is a foul (TRUE/FALSE).}
+\item{foul_col}{Column name indicating whether the row is a foul
+(TRUE/FALSE).}
 
 \item{game_id_col}{Column name for unique game identifiers.}
 
 \item{home_col}{Column name indicating the home team.}
 
-\item{action_team_col}{Column name indicating if the actioning team was "home" or "away".}
+\item{action_team_col}{Column name indicating if the actioning team was
+"home" or "away".}
 
-\item{team_name}{(Optional) The name of the team you want foul comparison stats for.}
+\item{team_name}{(Optional) The name of the team you want foul comparison
+stats for.}
 }
 \value{
-A data frame summarizing referee stats, including fouls called, games worked,
-fouls on the selected team and opponent, foul ratio, and fouls per game.
+A data frame summarizing referee stats, including fouls called,
+games worked, fouls on the selected team and opponent, foul ratio, and
+fouls per game.
 }
 \description{
-This function computes summary statistics for each referee, including total fouls called,
-number of games officiated, fouls on a specific team, fouls on opponents, and the foul ratio.
-It is built to work on raw play-by-play data where referees are listed in a single string column.
+This function computes summary statistics for each referee, including total
+fouls called, number of games officiated, fouls on a specific team, fouls on
+opponents, and the foul ratio. It is built to work on raw play-by-play data
+where referees are listed in a single string column.
 }
 \examples{
 data(usu_data)

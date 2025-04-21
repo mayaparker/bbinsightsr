@@ -23,25 +23,31 @@ plot_game_trends(
 
 \item{away_team}{A string giving the away team's full name.}
 
-\item{game_break}{A string indicating the segmentation method. One of \code{"timeout"}, \code{"half"}, or \code{"num_breaks"}.}
+\item{game_break}{A string indicating the segmentation method. One of
+\code{"timeout"}, \code{"half"}, or \code{"num_breaks"}.}
 
 \item{stat}{The statistic to plot. One of:
 \code{"points"}, \code{"fouls"}, \code{"assists"}, \code{"shots_made"},
 \code{"shots_total"}, \code{"threes_made"}, \code{"threes_total"},
 \code{"turnovers"}, \code{"steals"}, \code{"offensive_rebounds"},
 \code{"defensive_rebounds"}, \code{"rebounds"},
-\code{"fg_made"}, \code{"3pt_made"}, \code{"fg_attempts"}, \code{"3pt_attempts"}.}
+\code{"fg_made"}, \code{"3pt_made"}, \code{"fg_attempts"},
+\code{"3pt_attempts"}.}
 
-\item{num_breaks}{(Optional) Integer. Required only if \code{game_break = "num_breaks"}. Specifies how many evenly spaced segments to create.}
+\item{num_breaks}{(Optional) Integer. Required only if
+\code{game_break = "num_breaks"}. Specifies how many evenly spaced segments to
+create.}
 
-\item{game_date}{(Optional) A string (format: \code{"YYYY-MM-DD"}) to identify a specific game when multiple matchups exist between the teams.}
+\item{game_date}{(Optional) A string (format: \code{"YYYY-MM-DD"}) to identify a
+specific game when multiple matchups exist between the teams.}
 }
 \value{
 A \link[ggplot2]{ggplot} object showing the chosen stat by segment.
 }
 \description{
-Plots a selected statistic (e.g., points, fouls, turnovers) for a single game between two teams,
-segmented by timeouts, halves, or a user-specified number of breaks.
+Plots a selected statistic (e.g., points, fouls, turnovers) for a single game
+between two teams, segmented by timeouts, halves, or a user-specified number
+of breaks.
 }
 \examples{
 # Example 1: Plot with specific game date

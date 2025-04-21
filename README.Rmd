@@ -78,7 +78,7 @@ ft_stadium(
 ## Plot trends for a single game
 The plot_game_trends() function provides an easy way to visualize how a specific stat—such as points, fouls, or rebounds—changes over the course of a basketball game. Rather than just summarizing final game totals, this function breaks the game into meaningful segments (like timeouts or halves) and shows stat trends for one or both teams over those intervals. It’s especially useful for analyzing momentum shifts, evaluating team performance during key stretches, or comparing strategies between halves. This function works seamlessly with data scraped using the ncaahoopR package and is designed for game-level analysis.
 
-```{r game trends, fig.width = 9, fig.height = 5}
+```{r game-trends, fig.width = 9, fig.height = 5}
 plot_game_trends(
    games      = usu_data,
    home_team  = "Utah State",

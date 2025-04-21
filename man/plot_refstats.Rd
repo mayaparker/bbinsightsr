@@ -7,19 +7,21 @@
 plot_refstats(ref_stats, top_n = 5, team_label = "Team")
 }
 \arguments{
-\item{ref_stats}{A data frame created by \code{refstats()} containing referee summary statistics.}
+\item{ref_stats}{A data frame created by \code{refstats()} containing referee
+summary statistics.}
 
 \item{top_n}{Number of top referees to include in each plot.}
 
-\item{team_label}{A string to label your team in the chart title (e.g., "Utah State").}
+\item{team_label}{A string to label your team in the chart title
+(e.g., "Utah State").}
 }
 \value{
 A combined plot displaying all three referee charts using patchwork.
 }
 \description{
 This function creates and displays three visualizations for referee stats:
-fouls per game, fouls on team vs opponent, and the foul ratio. Designed to work
-directly with the output of \code{refstats()}.
+fouls per game, fouls on team vs opponent, and the foul ratio. Designed to
+work directly with the output of \code{refstats()}.
 }
 \examples{
 data(usu_data)

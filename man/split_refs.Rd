@@ -15,5 +15,6 @@ split_refs(data, ref_col = "referees")
 A data frame with one row per referee per play.
 }
 \description{
-Helper function to split referees listed as a single string into individual rows.
+Helper function to split referees listed as a single string into individual
+rows.
 }

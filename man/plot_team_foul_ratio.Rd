@@ -15,5 +15,6 @@ plot_team_foul_ratio(ref_stats, top_n = 5)
 A ggplot object.
 }
 \description{
-Helper function to visualize the ratio of fouls called on the team versus the opponent.
+Helper function to visualize the ratio of fouls called on the team versus
+the opponent.
 }

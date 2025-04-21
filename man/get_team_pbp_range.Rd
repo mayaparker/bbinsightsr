@@ -13,13 +13,16 @@ get_team_pbp_range(team, start_year = NULL, end_year = NULL, seasons = NULL)
 
 \item{end_year}{Integer (optional). End of range, e.g., 2023 for 2023-24.}
 
-\item{seasons}{Optional vector of season inputs like 2021, "2020-2021", or "22".}
+\item{seasons}{Optional vector of season inputs like 2021, "2020-2021",
+or "22".}
 }
 \value{
-A data frame combining play-by-play data for the given team and seasons.
+A data frame combining play-by-play data for the given team and
+seasons.
 }
 \description{
-This helper wraps \code{ncaahoopR::get_pbp()} to collect multiple seasons of data for a single team.
+This helper wraps \code{ncaahoopR::get_pbp()} to collect multiple seasons of data
+for a single team.
 It allows flexible season inputs and provides clean console feedback.
 }
 \examples{

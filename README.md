@@ -156,7 +156,8 @@ ft_stadium(
   home_team = "Utah State",
   arena = "Dee Glen Smith Spectrum"
 )
-#> Free Throw Summary: Utah State (Home) vs All Opponents (Away)
+#> Free Throw Summary: Utah State (Home) vs All Opponents
+#> (Away)
 #> # A tibble: 2 × 3
 #>   team_type `1st Half FT%` `2nd Half FT%`
 #>   <chr>              <dbl>          <dbl>
@@ -202,7 +203,7 @@ plot_game_trends(
 #> Game automatically selected: Utah State vs Wyoming on Jan 10, 2023
 ```
 
-<img src="man/figures/README-game trends-1.png" width="100%" />
+<img src="man/figures/README-game-trends-1.png" width="100%" />
 
 ## About this project
 

@@ -56,10 +56,11 @@ Scraped from ESPN via custom R scripts.
 usu_data
 }
 \description{
-A cleaned dataset containing play-by-play events for Utah State men's basketball
-games from the past five seasons, scraped from ESPN. It includes information about
-scores, fouls, referees, win probability, shot locations, and more for each play.
-The data can be used for referee analysis, in-game trends, and outcome modeling.
+A cleaned dataset containing play-by-play events for Utah State men's
+basketball games from the past five seasons, scraped from ESPN. It includes
+information about scores, fouls, referees, win probability, shot locations,
+and more for each play. The data can be used for referee analysis, in-game
+trends, and outcome modeling.
 }
 \examples{
 data(usu_data)

@@ -20,8 +20,9 @@
 #'
 #' @return A data frame with one row per segment, containing:
 #'   \item{`game_id`, `date`, `home`, `away`}{Basic game identifiers.}
-#'   \item{`segment_id`, `game_break`, `game_break_label`}
-#'     {Segment and label info.}
+#'   \item{`segment_id`, `game_break`, `game_break_label`}{
+#'     Segment and label info.
+#'   }
 #'   \item{`home_stat`, `away_stat`}{Values of the chosen stat for each team.}
 #'   \item{`stat`}{The name of the stat that was computed.}
 #'
