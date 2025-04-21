@@ -4,7 +4,7 @@
 \alias{plot_team_foul_ratio}
 \title{Plot foul ratio by referee}
 \usage{
-plot_team_foul_ratio(ref_stats, top_n = 15)
+plot_team_foul_ratio(ref_stats, top_n = 5)
 }
 \arguments{
 \item{ref_stats}{A data frame generated from \code{refstats()}.}

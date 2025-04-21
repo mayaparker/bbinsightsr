@@ -26,9 +26,7 @@ utils::globalVariables(c(
 #' data(usu_data)
 #' stats <- refstats(usu_data, team_name = "Utah State")
 #' plot_refstats(stats, team_label = "Utah State")
-
-
-plot_refstats <- function(ref_stats, top_n = 10, team_label = "Team") {
+plot_refstats <- function(ref_stats, top_n = 5, team_label = "Team") {
   p1 <- plot_fouls(ref_stats, top_n)
   p2 <- plot_team_fouls(ref_stats, top_n)
   p3 <- plot_team_foul_ratio(ref_stats, top_n)
@@ -47,7 +45,7 @@ plot_refstats <- function(ref_stats, top_n = 10, team_label = "Team") {
 #'
 #' @return A ggplot object.
 
-plot_fouls <- function(foul_stats, top_n = 10) {
+plot_fouls <- function(foul_stats, top_n = 5) {
   foul_stats |>
     dplyr::slice_max(fouls_per_game, n = top_n) |>
     ggplot2::ggplot(ggplot2::aes(x = reorder(referee, fouls_per_game), y = fouls_per_game)) +
@@ -71,12 +69,14 @@ plot_fouls <- function(foul_stats, top_n = 10) {
 #'
 #' @return A ggplot object.
 
-plot_team_fouls <- function(ref_stats, top_n = 15) {
+plot_team_fouls <- function(ref_stats, top_n = 5) {
   ref_stats |>
     dplyr::select(referee, fouls_on_team, fouls_on_opponent) |>
     dplyr::slice_max(fouls_on_team + fouls_on_opponent, n = top_n) |>
-    tidyr::pivot_longer(cols = c(fouls_on_team, fouls_on_opponent),
-                        names_to = "foul_type", values_to = "count") |>
+    tidyr::pivot_longer(
+      cols = c(fouls_on_team, fouls_on_opponent),
+      names_to = "foul_type", values_to = "count"
+    ) |>
     ggplot2::ggplot(ggplot2::aes(x = reorder(referee, count), y = count, fill = foul_type)) +
     ggplot2::geom_col(position = "dodge") +
     ggplot2::coord_flip() +
@@ -102,7 +102,7 @@ plot_team_fouls <- function(ref_stats, top_n = 15) {
 #'
 #' @return A ggplot object.
 
-plot_team_foul_ratio <- function(ref_stats, top_n = 15) {
+plot_team_foul_ratio <- function(ref_stats, top_n = 5) {
   ref_stats |>
     dplyr::filter(!is.na(fouls_ratio)) |>
     dplyr::slice_max(fouls_ratio, n = top_n) |>
@@ -117,4 +117,3 @@ plot_team_foul_ratio <- function(ref_stats, top_n = 15) {
     ) +
     ggplot2::theme_minimal()
 }
-

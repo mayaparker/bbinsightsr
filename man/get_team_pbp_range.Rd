@@ -22,3 +22,14 @@ A data frame combining play-by-play data for the given team and seasons.
 This helper wraps \code{ncaahoopR::get_pbp()} to collect multiple seasons of data for a single team.
 It allows flexible season inputs and provides clean console feedback.
 }
+\examples{
+\dontrun{
+  # Pull Wyoming games from the 2020–21 to 2022–23 seasons
+  wyoming_data <- get_team_pbp_range(
+    team        = "Wyoming",
+    start_year  = 2020,
+    end_year    = 2022
+  )
+}
+
+}

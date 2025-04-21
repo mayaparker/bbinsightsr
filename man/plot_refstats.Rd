@@ -4,7 +4,7 @@
 \alias{plot_refstats}
 \title{Plot Referee Summary Statistics}
 \usage{
-plot_refstats(ref_stats, top_n = 10, team_label = "Team")
+plot_refstats(ref_stats, top_n = 5, team_label = "Team")
 }
 \arguments{
 \item{ref_stats}{A data frame created by \code{refstats()} containing referee summary statistics.}

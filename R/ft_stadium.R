@@ -39,10 +39,12 @@ ft_stadium <- function(df, home_team, arena) {
       half %in% c(1, 2)
     )
 
-  if(nrow(ft_data) < 1){
-    stop("No free throw data from given input. Make sure df is from ncaahoopr,",
-         "and home_team, away_team, and arena are the correct corresponding",
-         " home, away, and arena names in the data frame.")
+  if (nrow(ft_data) < 1) {
+    stop(
+      "No free throw data from given input. Make sure df is from ncaahoopr,",
+      "and home_team, away_team, and arena are the correct corresponding",
+      " home, away, and arena names in the data frame."
+    )
   }
 
   # Add column identifying whether each shot is by home or away team
@@ -63,15 +65,18 @@ ft_stadium <- function(df, home_team, arena) {
   under_min <- count_check %>% dplyr::filter(n < 15)
 
   if (nrow(under_min) > 0) {
-    warning("Some team_type-half groups have fewer than 15 observations. ",
-            "T-test results may not be reliable.\n\n",
-            paste0(
-              apply(under_min, 1, function(row) {
-                paste0("- ", row["team_type"], ", Half ", row["half"], ": ",
-                       row["n"], " observations")
-              }),
-              collapse = "\n"
-            )
+    warning(
+      "Some team_type-half groups have fewer than 15 observations. ",
+      "T-test results may not be reliable.\n\n",
+      paste0(
+        apply(under_min, 1, function(row) {
+          paste0(
+            "- ", row["team_type"], ", Half ", row["half"], ": ",
+            row["n"], " observations"
+          )
+        }),
+        collapse = "\n"
+      )
     )
   }
 
@@ -96,8 +101,8 @@ ft_stadium <- function(df, home_team, arena) {
     ) %>%
     dplyr::rename_with(
       .fn = ~ dplyr::recode(.x,
-                            "Half_1" = "1st Half FT%",
-                            "Half_2" = "2nd Half FT%"
+        "Half_1" = "1st Half FT%",
+        "Half_2" = "2nd Half FT%"
       )
     )
 

@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of bbinsightsR is to ...
+The bbinsightsR package is built as a companion and extension to the excellent ncaahoopR package, which provides tools to scrape and visualize NCAA men's basketball play-by-play data from ESPN. Our package builds on that foundation by offering additional helper functions and specialized analysis tools focused on in-game trends, referee tendencies, and free throw performance breakdowns. While ncaahoopR provides the raw data and core scraping utilities, bbinsightsR enhances the workflow for researchers and fans who want to explore detailed patterns across segments of games, such as points scored by timeout, fouls called by half, or opponent performance against a given team.
 
 ## Installation
 
@@ -29,27 +29,74 @@ You can install the development version of bbinsightsR from [GitHub](https://git
 # pak::pak("mayaparker/bbinsightsr")
 ```
 
-## Example
+## The data
 
-This is a basic example which shows you how to solve a common problem:
+Our package is built to use data scraped from ESPN play by play data. You can obtain a season of this data by using the 'ncaahoopR' package or you can use our get_pbp_range() function to pull multiple seasons of data for a team. This will require you to load the ncaahoopR package to pull the data, however it will allow you to pull multiple seasons at once. (This function does take a a couple minutes depending on the number of seasons requested). For exploring the package we have included 5 years of play by play data for Utah State, useable as usu_data
 
-```{r example}
-## library(bbinsightsR)
-## basic example code
+```{r get data}
+library(bbinsightsR)
+devtools::load_all()
+head(usu_data)
+
+# wyoming_data <- get_team_pbp_range(
+#     team        = "Wyoming",
+#     start_year  = 2020,
+#     end_year    = 2022)
+# head(wyoming_data)
+```
+## Referee analysis
+
+The refstats and plot_refstats functions provide insights on individual referees in the NCAA. Refstats returns a table with the name of each referee from the data provided, number of fouls called, number of games reffed, fouls per game, fouls against and fouls for a specified team, and the foul against/for ratio. The plot_refstats is designed to work directly with the output of the refstats function. This function allows the user to create visuals for the refs with the most fouls called, refs with most fouls called against the specified team, and refs with the highest foul against for ratio. 
+
+```{r refs}
+stats <- refstats(usu_data, team_name = "Utah State")
+
+head(refstats)
+
+plot_refstats(stats, top_n = 5, team_label = "Utah State")
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+## Free throw shooting analysis
 
-```{r cars}
-summary(cars)
+The ft_stadium and ft_opponent functions provide insights on free throw percentages from given data. The ft_stadium summarizes and compares free throw performance by half for a specified home team and their opponents in a particular arena. The function reports free throw percentages for both the home and away teams across first and second halves, and performs a t-test for the away team's performance by half. The ft_opponent analyzes and summarizes free throw performance for both teams (home and away) between two specific teams in a specific arena. The function provides a summary table of free throw percentages by half, checks if groups have sufficient sample sizes, and performs t-tests comparing first- and second-half free throw accuracy for each team.
+
+```{r free throws}
+ft_opponent(
+  df = usu_data,
+  home_team = "Utah State",
+  away_team = "Boise St",
+  arena = "Dee Glen Smith Spectrum"
+)
+
+ft_stadium(
+  df = usu_data,
+  home_team = "Utah State",
+  arena = "Dee Glen Smith Spectrum"
+)
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
+## Plot trends for a single game
+The plot_game_trends() function provides an easy way to visualize how a specific stat—such as points, fouls, or rebounds—changes over the course of a basketball game. Rather than just summarizing final game totals, this function breaks the game into meaningful segments (like timeouts or halves) and shows stat trends for one or both teams over those intervals. It’s especially useful for analyzing momentum shifts, evaluating team performance during key stretches, or comparing strategies between halves. This function works seamlessly with data scraped using the ncaahoopR package and is designed for game-level analysis.
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r game trends, fig.width = 9, fig.height = 5}
+plot_game_trends(
+   games      = usu_data,
+   home_team  = "Utah State",
+   away_team  = "Wyoming",
+   game_break = "timeout",
+   stat       = "points",
+   game_date  = "2023-01-10"
+ )
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+## About this project
+This package was created as a final project for STAT 5555/6555 at Utah State University by:
+
+Maya Parker
+
+Bradford Rasmussen
+
+Dallin Wilson
+
+We wanted to help others explore in-game momentum, referee impact, and team-specific patterns with real NCAA basketball data.
+

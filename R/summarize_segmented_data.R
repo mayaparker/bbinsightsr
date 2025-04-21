@@ -26,13 +26,13 @@
 summarize_segmented_data <- function(segmented_game, stat = "points") {
   # split into list of chunks
   chunks <- split(segmented_game, segmented_game$segment_id)
-  
+
   # for each chunk, compute home/away stat
   stats_list <- lapply(chunks, calculate_stats_for_segment, stat = stat)
-  
+
   # bind back together
   summary_df <- do.call(rbind, stats_list)
   rownames(summary_df) <- NULL
-  
+
   return(summary_df)
 }

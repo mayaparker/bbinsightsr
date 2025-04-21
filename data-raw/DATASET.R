@@ -11,5 +11,3 @@ usethis::use_data(usu_data, overwrite = TRUE)
 
 
 usethis::use_data(usu_data, overwrite = TRUE)
-
-

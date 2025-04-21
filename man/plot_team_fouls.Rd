@@ -4,7 +4,7 @@
 \alias{plot_team_fouls}
 \title{Plot team vs opponent foul counts}
 \usage{
-plot_team_fouls(ref_stats, top_n = 15)
+plot_team_fouls(ref_stats, top_n = 5)
 }
 \arguments{
 \item{ref_stats}{A data frame generated from \code{refstats()}.}

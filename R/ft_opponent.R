@@ -49,11 +49,13 @@ ft_opponent <- function(df, home_team, away_team, arena) {
       make_binary = ifelse(scoring_play == TRUE, 1, 0)
     )
 
-  if(nrow(ft_data) < 1){
-    stop("No free throw data from given input. Make sure df is play
+  if (nrow(ft_data) < 1) {
+    stop(
+      "No free throw data from given input. Make sure df is play
          by play data from ncaahoopr,",
-         "and home_team, away_team, and arena are the correct corresponding",
-         " home, away, and arena names in the data frame.")
+      "and home_team, away_team, and arena are the correct corresponding",
+      " home, away, and arena names in the data frame."
+    )
   }
 
   # Count observations by team and half
@@ -65,15 +67,18 @@ ft_opponent <- function(df, home_team, away_team, arena) {
   under_min <- count_check %>% dplyr::filter(n < 15)
 
   if (nrow(under_min) > 0) {
-    warning("Some shot_team-half groups have fewer than 15 observations. ",
-            "T-test results may not be reliable.\n\n",
-            paste0(
-              apply(under_min, 1, function(row) {
-                paste0("- ", row["shot_team"], ", Half ", row["half"], ": ",
-                       row["n"], " observations")
-              }),
-              collapse = "\n"
-            )
+    warning(
+      "Some shot_team-half groups have fewer than 15 observations. ",
+      "T-test results may not be reliable.\n\n",
+      paste0(
+        apply(under_min, 1, function(row) {
+          paste0(
+            "- ", row["shot_team"], ", Half ", row["half"], ": ",
+            row["n"], " observations"
+          )
+        }),
+        collapse = "\n"
+      )
     )
   }
 

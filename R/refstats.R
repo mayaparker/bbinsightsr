@@ -19,7 +19,6 @@
 #' @examples
 #' data(usu_data)
 #' refstats(usu_data, team_name = "Utah State")
-
 refstats <- function(data,
                      ref_col = "referees",
                      foul_col = "foul",
@@ -54,7 +53,8 @@ refstats <- function(data,
     )) |>
     dplyr::mutate(
       fouls_per_game = dplyr::if_else(games_worked == 0, NA_real_,
-                                      fouls_called / games_worked)
+        fouls_called / games_worked
+      )
     ) |>
     dplyr::arrange(dplyr::desc(fouls_ratio))
 }
@@ -70,7 +70,7 @@ refstats <- function(data,
 
 split_refs <- function(data, ref_col = "referees") {
   dplyr::mutate(data,
-                RefereesList = stringr::str_split(.data[[ref_col]], "/\\s*")
+    RefereesList = stringr::str_split(.data[[ref_col]], "/\\s*")
   ) |>
     tidyr::unnest(RefereesList) |>
     dplyr::rename(referee = RefereesList)
@@ -142,7 +142,7 @@ count_team_fouls <- function(data,
     ) |>
     dplyr::mutate(
       fouls_ratio = dplyr::if_else(fouls_on_opponent == 0, NA_real_,
-                                   fouls_on_team / fouls_on_opponent)
+        fouls_on_team / fouls_on_opponent
+      )
     )
 }
-

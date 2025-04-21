@@ -1,4 +1,4 @@
-#'#' @import hms
+#' #' @import hms
 
 #' Utah State University Basketball Play-by-Play Data
 #'
@@ -134,5 +134,3 @@
 #' data(ncaa_colors)
 #' head(ncaa_colors)
 "ncaa_colors"
-
-

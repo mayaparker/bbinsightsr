@@ -33,15 +33,19 @@ select_single_game <- function(data, team, opponent, game_date = NULL) {
       dplyr::filter(as.Date(date) == as.Date(game_date))
 
     if (nrow(date_filtered) == 1) {
-      message("Game automatically selected: ", date_filtered$home[1], " vs ", date_filtered$away[1],
-              " on ", format(as.Date(date_filtered$date[1]), "%b %d, %Y"))
+      message(
+        "Game automatically selected: ", date_filtered$home[1], " vs ", date_filtered$away[1],
+        " on ", format(as.Date(date_filtered$date[1]), "%b %d, %Y")
+      )
       return(game_matches %>% dplyr::filter(game_id == date_filtered$game_id[1]))
     } else {
       message("No game found on ", as.character(game_date), " between these teams.")
       message("Available dates:")
       for (i in seq_len(nrow(unique_games))) {
         cat(i, ": ", unique_games$home[i], " vs ", unique_games$away[i],
-            " - ", unique_games$date_label[i], "\n", sep = "")
+          " - ", unique_games$date_label[i], "\n",
+          sep = ""
+        )
       }
     }
   }
@@ -50,7 +54,9 @@ select_single_game <- function(data, team, opponent, game_date = NULL) {
   cat("Multiple games found between these teams:\n")
   for (i in seq_len(nrow(unique_games))) {
     cat(i, ": ", unique_games$home[i], " vs ", unique_games$away[i],
-        " - ", unique_games$date_label[i], "\n", sep = "")
+      " - ", unique_games$date_label[i], "\n",
+      sep = ""
+    )
   }
 
   repeat {
@@ -65,8 +71,10 @@ select_single_game <- function(data, team, opponent, game_date = NULL) {
   selected_game_id <- unique_games$game_id[selected_index]
   selected_game <- game_matches %>% dplyr::filter(game_id == selected_game_id)
 
-  message("You selected: ", unique_games$home[selected_index], " vs ",
-          unique_games$away[selected_index], " on ", unique_games$date_label[selected_index])
+  message(
+    "You selected: ", unique_games$home[selected_index], " vs ",
+    unique_games$away[selected_index], " on ", unique_games$date_label[selected_index]
+  )
 
   return(selected_game)
 }

@@ -26,7 +26,7 @@ plot_stat_by_segment <- function(summary_data) {
   # 1. Pull out team names from the summary
   home_team <- unique(summary_data$home)[1]
   away_team <- unique(summary_data$away)[1]
-  teams     <- c(home_team, away_team)
+  teams <- c(home_team, away_team)
 
   # 2. Lookup home team colors (fallback to stripped match if needed)
   home_colors <- ncaa_colors %>% filter(espn_name == home_team)
@@ -38,8 +38,8 @@ plot_stat_by_segment <- function(summary_data) {
 
     if (nrow(fallback_name) > 0) {
       home_colors <- fallback_name
-      home_team   <- fallback_name$espn_name[1]  # update to canonical name
-      teams[1]    <- home_team
+      home_team <- fallback_name$espn_name[1] # update to canonical name
+      teams[1] <- home_team
     }
   }
 
@@ -69,7 +69,7 @@ plot_stat_by_segment <- function(summary_data) {
 
   # 7. Assign team colors
   team_colors <- c(
-    setNames(home_colors$primary_color,   home_team),
+    setNames(home_colors$primary_color, home_team),
     setNames(home_colors$secondary_color, away_team)
   )
 
@@ -79,9 +79,9 @@ plot_stat_by_segment <- function(summary_data) {
 
   # 8. Final plot
   n_segments <- length(levels(plot_df$segment_label))
-  vlines     <- seq(1.5, n_segments - 0.5, by = 1)
-  max_y      <- ceiling(max(plot_df$value, na.rm = TRUE))
-  max_y_adj  <- ifelse(max_y %% 2 == 1, max_y + 1, max_y)
+  vlines <- seq(1.5, n_segments - 0.5, by = 1)
+  max_y <- ceiling(max(plot_df$value, na.rm = TRUE))
+  max_y_adj <- ifelse(max_y %% 2 == 1, max_y + 1, max_y)
 
   ggplot(plot_df, aes(x = segment_label, y = value, fill = team)) +
     geom_col(
@@ -110,7 +110,7 @@ plot_stat_by_segment <- function(summary_data) {
     theme_bw(base_size = 14) +
     theme(
       legend.position = "top",
-      axis.text.x     = element_text(
+      axis.text.x = element_text(
         angle  = 45,
         hjust  = 1,
         margin = margin(t = 8, l = 10)

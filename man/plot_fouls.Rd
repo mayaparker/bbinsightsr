@@ -4,7 +4,7 @@
 \alias{plot_fouls}
 \title{Plot total fouls per game by referee}
 \usage{
-plot_fouls(foul_stats, top_n = 10)
+plot_fouls(foul_stats, top_n = 5)
 }
 \arguments{
 \item{foul_stats}{A data frame generated from \code{refstats()}.}

@@ -13,27 +13,24 @@ assign_game_breaks(
 \arguments{
 \item{game_data}{A data frame containing play-by-play data for a single game. Must include \code{play_id}, \code{description}, \code{half}, and \code{secs_remaining_absolute} columns.}
 
-\item{segment_by}{A character string indicating how to segment the game. Options include:
+\item{segment_by}{A character string indicating how to segment the game. One of:
 \itemize{
-\item \code{"half"}: Breaks the game into 20-minute halves (plus OT if present).
-\item \code{"timeout"}: Uses timeouts or "end" descriptions to define breaks.
-\item \code{"num_breaks"}: Splits the game evenly into a specified number of breaks.
+\item \code{"half"}: Breaks the game into halves or OT periods.
+\item \code{"timeout"}: Uses coach/official timeouts or "end" descriptions to define breaks.
+\item \code{"num_breaks"}: Splits the game evenly into a given number of breaks.
 }}
 
-\item{num_breaks}{An integer specifying how many breaks to create (required if \code{segment_by = "num_breaks"}).}
+\item{num_breaks}{Integer (optional). Required if \code{segment_by = "num_breaks"}.}
 }
 \value{
-A modified version of the input data frame, including:
-\item{\code{segment_id}}{An integer indicating which segment each row belongs to.}
-\item{\code{game_break}}{Logical; \code{TRUE} if the row marks a break between segments.}
-\item{\code{game_break_label}}{A string combining the break description and timestamp.}
+A modified version of \code{game_data} with columns:
+\item{\code{segment_id}}{An integer indicating segment assignment.}
+\item{\code{game_break}}{Logical TRUE/FALSE indicator for break rows.}
+\item{\code{game_break_label}}{Label showing the break and formatted time (MM:SS).}
 }
 \description{
 Splits a single game's play-by-play data into sequential segments based on a selected break type.
-Adds a \code{segment_id} to each row of the game and marks the appropriate rows as \code{game_break = TRUE}
-to identify key game breaks (e.g., timeouts, halves, or custom intervals).
-}
-\details{
-This helper function is intended for internal use only and is not exported.
+Adds a \code{segment_id} to each row and marks \code{game_break = TRUE} for key break events
+(e.g., timeouts, halftime, end of game). Appends \code{game_break_label} with a consistent time.
 }
 \keyword{internal}

@@ -9,6 +9,17 @@
 #' @param seasons Optional vector of season inputs like 2021, "2020-2021", or "22".
 #'
 #' @return A data frame combining play-by-play data for the given team and seasons.
+#' @examples
+#' \dontrun{
+#'   # Pull Wyoming games from the 2020–21 to 2022–23 seasons
+#'   wyoming_data <- get_team_pbp_range(
+#'     team        = "Wyoming",
+#'     start_year  = 2020,
+#'     end_year    = 2022
+#'   )
+#' }
+#'
+#' @export
 get_team_pbp_range <- function(team,
                                start_year = NULL,
                                end_year = NULL,
@@ -79,14 +90,17 @@ get_team_pbp_range <- function(team,
   # --- Pull and combine PBP data ---
   all_data <- purrr::map_dfr(parsed_seasons, function(season) {
     message("\nScraping data for season: ", season)
-    result <- tryCatch({
-      df <- invisible(utils::capture.output(ncaahoopR::get_pbp(team, season)))
-      message(season, " added to data frame")
-      df
-    }, error = function(e) {
-      warning("Failed to pull ", season, ": ", e$message)
-      NULL
-    })
+    result <- tryCatch(
+      {
+        df <- invisible(utils::capture.output(ncaahoopR::get_pbp(team, season)))
+        message(season, " added to data frame")
+        df
+      },
+      error = function(e) {
+        warning("Failed to pull ", season, ": ", e$message)
+        NULL
+      }
+    )
     result
   })
 

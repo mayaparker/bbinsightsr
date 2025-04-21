@@ -56,10 +56,9 @@ plot_game_trends <- function(
       "fg_made", "3pt_made", "fg_attempts", "3pt_attempts"
     ),
     num_breaks = NULL,
-    game_date  = NULL
-) {
+    game_date = NULL) {
   game_break <- match.arg(game_break)
-  stat       <- match.arg(stat)
+  stat <- match.arg(stat)
 
   selected_game <- select_single_game(
     data      = games,

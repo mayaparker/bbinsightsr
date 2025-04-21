@@ -19,9 +19,13 @@ Imports:
     stats,
     utils,
     stringr,
-    purrr
+    purrr,
+    hms
 Suggests:
-    ncaahoopR
+    knitr,
+    ncaahoopR,
+    rmarkdown
 Depends: 
     R (>= 3.5)
 LazyData: true
+VignetteBuilder: knitr
