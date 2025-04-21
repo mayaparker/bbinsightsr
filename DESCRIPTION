@@ -19,7 +19,8 @@ Imports:
     stats,
     utils,
     stringr,
-    purrr,
+    purrr
+Suggests:
     ncaahoopR
 Depends: 
     R (>= 3.5)

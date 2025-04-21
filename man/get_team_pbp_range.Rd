@@ -22,4 +22,3 @@ A data frame combining play-by-play data for the given team and seasons.
 This helper wraps \code{ncaahoopR::get_pbp()} to collect multiple seasons of data for a single team.
 It allows flexible season inputs and provides clean console feedback.
 }
-\keyword{internal}

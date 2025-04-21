@@ -9,7 +9,6 @@
 #' @param seasons Optional vector of season inputs like 2021, "2020-2021", or "22".
 #'
 #' @return A data frame combining play-by-play data for the given team and seasons.
-#' @keywords internal
 get_team_pbp_range <- function(team,
                                start_year = NULL,
                                end_year = NULL,
