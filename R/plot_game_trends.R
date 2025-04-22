@@ -29,8 +29,6 @@ utils::globalVariables("dictionary")
 #'
 #' @return A \link[ggplot2]{ggplot} object showing the chosen stat by segment.
 #'
-#' @export
-#'
 #' @importFrom tools toTitleCase
 #' @importFrom ggplot2 ggtitle
 #'
@@ -55,6 +53,8 @@ utils::globalVariables("dictionary")
 #'   stat       = "rebounds"
 #' )
 #' }
+#'
+#' @export
 plot_game_trends <- function(
     games,
     home_team,

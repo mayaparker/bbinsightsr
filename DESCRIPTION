@@ -16,19 +16,18 @@ Imports:
     tidyr,
     ggplot2,
     patchwork,
-    magrittr,
     glue,
     tibble,
     stats,
     utils,
     stringr,
     purrr,
-    hms,
-    crayon
+    hms
 Suggests:
     knitr,
     ncaahoopR,
-    rmarkdown
+    rmarkdown,
+    crayon
 Depends: 
     R (>= 3.5)
 LazyData: true

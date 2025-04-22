@@ -1,3 +1,5 @@
 .Rproj.user
 Scripts/
 inst/doc
+/doc/
+/Meta/

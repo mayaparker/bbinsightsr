@@ -74,4 +74,5 @@ plot_game_trends(
   stat       = "rebounds"
 )
 }
+
 }

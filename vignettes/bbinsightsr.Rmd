@@ -20,14 +20,14 @@ This vignette introduces the main functionality and demonstrates typical workflo
 
 Install the development version from GitHub using `pak`:
 
-``` r
+``` {r, eval=FALSE, echo=TRUE}
 # install.packages("pak")
 pak::pak("mayaparker/bbinsightsr")
 ```
 
 # Load the Package
 
-``` r
+``` {r}
 library(bbinsightsR)
 ```
 
@@ -35,7 +35,7 @@ library(bbinsightsR)
 
 The package includes `usu_data`, a dataset containing five seasons of play-by-play data for Utah State men’s basketball games. 
 
-``` r
+``` {r}
 head(usu_data)
 ```
 # Referee Analysis
@@ -44,7 +44,7 @@ head(usu_data)
 
 You can use `refstats()` to analyze individual referee behavior based on fouls and calls involving a specific team:
 
-``` r
+``` {r}
 stats <- refstats(usu_data, team_name = "Utah State")
 head(stats)
 ```
@@ -53,7 +53,7 @@ head(stats)
 
 The `plot_refstats()` function can be used to visualize the most active referees and how they interact with your team of interest:
 
-``` r
+``` {r}
 plot_refstats(stats, top_n = 5, team_label = "Utah State")
 ```
 
@@ -64,22 +64,20 @@ plot_refstats(stats, top_n = 5, team_label = "Utah State")
 Analyze free throw accuracy by half for two specific teams:
 
 
-``` r
+``` {r}
 ft_opponent(
   df = usu_data,
   home_team = "Utah State",
   away_team = "Boise St",
   arena = "Dee Glen Smith Spectrum"
 )
-
 ```
 ## Arena-Based Analysis
 
 Assess home and opponent free throw trends at a given arena:
 
 
-``` r
-
+``` {r}
 ft_stadium(
   df = usu_data,
   home_team = "Utah State",
@@ -91,7 +89,7 @@ ft_stadium(
 
 Use `plot_game_trends()` to visualize scoring or stat patterns across game segments like timeouts:
 
-``` r
+``` {r}
 plot_game_trends(
   games      = usu_data,
   home_team  = "Utah State",
