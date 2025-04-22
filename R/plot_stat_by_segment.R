@@ -32,11 +32,11 @@ plot_stat_by_segment <- function(summary_data) {
   teams <- c(home_team, away_team)
 
   # 2. Lookup home team colors (fallback to stripped match if needed)
-  home_colors <- ncaa_colors %>% filter(espn_name == home_team)
+  home_colors <- ncaa_colors |> filter(espn_name == home_team)
 
   if (nrow(home_colors) == 0) {
-    fallback_name <- ncaa_colors %>%
-      mutate(stripped_name = gsub("[[:punct:][:space:]]", "", espn_name)) %>%
+    fallback_name <- ncaa_colors |>
+      mutate(stripped_name = gsub("[[:punct:][:space:]]", "", espn_name)) |>
       filter(stripped_name == gsub("[[:punct:][:space:]]", "", home_team))
 
     if (nrow(fallback_name) > 0) {
@@ -47,15 +47,15 @@ plot_stat_by_segment <- function(summary_data) {
   }
 
   # 3. Build ESPN_PBP → abbreviation lookup
-  abbrv_lookup <- dictionary %>%
-    filter(ESPN_PBP %in% teams) %>%
-    select(ESPN_PBP, ESPN) %>%
+  abbrv_lookup <- dictionary |>
+    filter(ESPN_PBP %in% teams) |>
+    select(ESPN_PBP, ESPN) |>
     deframe()
 
   # 4. Replace team names in game_break_label with abbreviations
-  summary_data <- summary_data %>%
+  summary_data <- summary_data |>
     mutate(game_break_label = stringr::str_replace_all(game_break_label,
-                                                       abbrv_lookup)) %>%
+                                                       abbrv_lookup)) |>
     mutate(game_break_label = gsub("Official TV Timeout", "TV Timeout",
                                    game_break_label, fixed = TRUE))
 
@@ -63,11 +63,11 @@ plot_stat_by_segment <- function(summary_data) {
   stat_name <- unique(summary_data$stat)[1]
 
   # 6. Pivot to long format
-  plot_df <- summary_data %>%
+  plot_df <- summary_data |>
     select(segment_id, segment_label = game_break_label, home, away, home_stat,
-           away_stat) %>%
+           away_stat) |>
     pivot_longer(c(home_stat, away_stat),
-                 names_to = "side", values_to = "value") %>%
+                 names_to = "side", values_to = "value") |>
     mutate(
       team = if_else(side == "home_stat", home, away),
       team = factor(team, levels = teams),

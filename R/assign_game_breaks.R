@@ -67,8 +67,8 @@ assign_game_breaks <- function(game_data, segment_by = c("half", "timeout",
                      tolower(candidates$description))
     candidates$priority[eo_half] <- pmin(candidates$priority[eo_half], 3L)
 
-    selected <- dplyr::group_by(candidates, secs_remaining_absolute) %>%
-      dplyr::slice_min(priority, with_ties = FALSE) %>%
+    selected <- dplyr::group_by(candidates, secs_remaining_absolute) |>
+      dplyr::slice_min(priority, with_ties = FALSE) |>
       dplyr::ungroup()
 
     break_idxs <- which(game_data$play_id %in% selected$play_id)

@@ -17,23 +17,23 @@
 #' @importFrom dplyr filter arrange distinct mutate
 #' @importFrom utils flush.console
 select_single_game <- function(data, team, opponent, game_date = NULL) {
-  game_matches <- data %>%
+  game_matches <- data |>
     dplyr::filter((home == team & away == opponent) |
-                    (home == opponent & away == team)) %>%
+                    (home == opponent & away == team)) |>
     dplyr::arrange(date, game_id)
 
   if (nrow(game_matches) == 0) {
     stop("No games found between those teams.")
   }
 
-  unique_games <- game_matches %>%
-    dplyr::distinct(game_id, date, home, away) %>%
-    dplyr::arrange(date) %>%
+  unique_games <- game_matches |>
+    dplyr::distinct(game_id, date, home, away) |>
+    dplyr::arrange(date) |>
     dplyr::mutate(date_label = format(as.Date(date), "%b %d, %Y"))
 
   # If game_date is specified
   if (!is.null(game_date)) {
-    date_filtered <- unique_games %>%
+    date_filtered <- unique_games |>
       dplyr::filter(as.Date(date) == as.Date(game_date))
 
     if (nrow(date_filtered) == 1) {
@@ -42,7 +42,7 @@ select_single_game <- function(data, team, opponent, game_date = NULL) {
         date_filtered$away[1],
         " on ", format(as.Date(date_filtered$date[1]), "%b %d, %Y")
       )
-      return(game_matches %>% dplyr::filter(game_id ==
+      return(game_matches |> dplyr::filter(game_id ==
                                               date_filtered$game_id[1]))
     } else {
       message("No game found on ", as.character(game_date),
@@ -80,7 +80,7 @@ select_single_game <- function(data, team, opponent, game_date = NULL) {
   }
 
   selected_game_id <- unique_games$game_id[selected_index]
-  selected_game <- game_matches %>% dplyr::filter(game_id == selected_game_id)
+  selected_game <- game_matches |> dplyr::filter(game_id == selected_game_id)
 
   message(
     "You selected: ", unique_games$home[selected_index], " vs ",

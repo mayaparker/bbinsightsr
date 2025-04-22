@@ -23,7 +23,8 @@ Imports:
     utils,
     stringr,
     purrr,
-    hms
+    hms,
+    crayon
 Suggests:
     knitr,
     ncaahoopR,

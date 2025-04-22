@@ -1,5 +1,5 @@
 utils::globalVariables(c(
-  ".", "%>%", "home", "away", "referee", "game_id", "foul",
+  ".", "|>", "home", "away", "referee", "game_id", "foul",
   "foul_on_team", "foul_on_opponent", "shot_team", "half",
   "scoring_play", "make_binary", "ft_percentage", "team_type",
   "foul_type", "count", "fouls_called", "games_worked",

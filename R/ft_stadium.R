@@ -30,7 +30,7 @@
 #' @export
 ft_stadium <- function(df, home_team, arena) {
   # Filter for all games where this team is the home team
-  ft_data <- df %>%
+  ft_data <- df |>
     dplyr::filter(
       home == home_team,
       arena == arena,
@@ -48,7 +48,7 @@ ft_stadium <- function(df, home_team, arena) {
   }
 
   # Add column identifying whether each shot is by home or away team
-  ft_data <- ft_data %>%
+  ft_data <- ft_data |>
     dplyr::mutate(
       team_type = dplyr::case_when(
         shot_team == home ~ "Home",
@@ -58,11 +58,11 @@ ft_stadium <- function(df, home_team, arena) {
     )
 
   # Check sample sizes by team_type and half
-  count_check <- ft_data %>%
-    dplyr::group_by(team_type, half) %>%
+  count_check <- ft_data |>
+    dplyr::group_by(team_type, half) |>
     dplyr::summarise(n = dplyr::n(), .groups = "drop")
 
-  under_min <- count_check %>% dplyr::filter(n < 15)
+  under_min <- count_check |> dplyr::filter(n < 15)
 
   if (nrow(under_min) > 0) {
     warning(
@@ -81,8 +81,8 @@ ft_stadium <- function(df, home_team, arena) {
   }
 
   # Summary FT% table
-  summary <- ft_data %>%
-    dplyr::group_by(team_type, half) %>%
+  summary <- ft_data |>
+    dplyr::group_by(team_type, half) |>
     dplyr::summarise(
       attempts = dplyr::n(),
       made = sum(make_binary),
@@ -91,14 +91,14 @@ ft_stadium <- function(df, home_team, arena) {
     )
 
   # Pivot summary table to wide format (safe rename)
-  ft_wide <- summary %>%
-    dplyr::select(team_type, half, ft_percentage) %>%
+  ft_wide <- summary |>
+    dplyr::select(team_type, half, ft_percentage) |>
     tidyr::pivot_wider(
       names_from = half,
       values_from = ft_percentage,
       names_prefix = "Half_",
       values_fill = list(ft_percentage = 0)
-    ) %>%
+    ) |>
     dplyr::rename_with(
       .fn = ~ dplyr::recode(.x,
         "Half_1" = "1st Half FT%",
@@ -112,7 +112,7 @@ ft_stadium <- function(df, home_team, arena) {
   print(ft_wide)
 
   # Run t-test for away team (1st vs 2nd half)
-  away_ft <- ft_data %>%
+  away_ft <- ft_data |>
     dplyr::filter(team_type == "Away")
 
   if (length(unique(away_ft$half)) > 1) {

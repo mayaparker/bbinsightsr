@@ -13,7 +13,6 @@
 #' @param away_team Character string specifying the name of the away team.
 #' @param arena Character string specifying the name of the arena.
 #'
-#' @importFrom magrittr %>%
 #' @importFrom stats t.test
 #' @importFrom dplyr filter mutate group_by summarise case_when
 
@@ -36,7 +35,7 @@
 #' @export
 ft_opponent <- function(df, home_team, away_team, arena) {
   # Filter for relevant games and FTs
-  ft_data <- df %>%
+  ft_data <- df |>
     dplyr::filter(
       home == home_team,
       away == away_team,
@@ -44,7 +43,7 @@ ft_opponent <- function(df, home_team, away_team, arena) {
       free_throw == TRUE,
       shot_team %in% c(home_team, away_team),
       half %in% c(1, 2)
-    ) %>%
+    ) |>
     dplyr::mutate(
       make_binary = ifelse(scoring_play == TRUE, 1, 0)
     )
@@ -59,12 +58,12 @@ ft_opponent <- function(df, home_team, away_team, arena) {
   }
 
   # Count observations by team and half
-  count_check <- ft_data %>%
-    dplyr::group_by(shot_team, half) %>%
+  count_check <- ft_data |>
+    dplyr::group_by(shot_team, half) |>
     dplyr::summarise(n = dplyr::n(), .groups = "drop")
 
   # Check if any group has <15 obs
-  under_min <- count_check %>% dplyr::filter(n < 15)
+  under_min <- count_check |> dplyr::filter(n < 15)
 
   if (nrow(under_min) > 0) {
     warning(
@@ -83,8 +82,8 @@ ft_opponent <- function(df, home_team, away_team, arena) {
   }
 
   # Summary table
-  summary <- ft_data %>%
-    dplyr::group_by(shot_team, half) %>%
+  summary <- ft_data |>
+    dplyr::group_by(shot_team, half) |>
     dplyr::summarise(
       attempts = dplyr::n(),
       made = sum(make_binary),
@@ -93,14 +92,14 @@ ft_opponent <- function(df, home_team, away_team, arena) {
     )
 
   # Pivot FT% to wide format
-  ft_wide <- summary %>%
-    dplyr::select(shot_team, half, ft_percentage) %>%
+  ft_wide <- summary |>
+    dplyr::select(shot_team, half, ft_percentage) |>
     tidyr::pivot_wider(
       names_from = half,
       values_from = ft_percentage,
       names_prefix = "Half_",
       values_fill = 0
-    ) %>%
+    ) |>
     dplyr::rename(
       `1st Half FT%` = Half_1,
       `2nd Half FT%` = Half_2
@@ -112,7 +111,7 @@ ft_opponent <- function(df, home_team, away_team, arena) {
 
   # Run t-tests for each team
   for (team in c(home_team, away_team)) {
-    team_ft <- ft_data %>% dplyr::filter(shot_team == team)
+    team_ft <- ft_data |> dplyr::filter(shot_team == team)
 
     if (length(unique(team_ft$half)) > 1) {
       t_test <- t.test(make_binary ~ half, data = team_ft)
