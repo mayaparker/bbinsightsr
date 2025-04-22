@@ -10,9 +10,12 @@ vignette: >
 
 # Overview
 
-The `bbinsightsR` package provides analytical tools to explore NCAA basketball play-by-play data with a specific focus on referee behavior, team momentum, and free throw performance. This package was developed as part of a course project and builds on top of the `ncaahoopR` package by introducing more granular summaries and visualizations for team and referee trends.
+The `bbinsightsR` package provides tools for analyzing NCAA basketball play-by-play data with a focus on referee behavior, momentum changes, and free throw accuracy. This is useful for fans, analysts, and sports statisticians who want to investigate officiating fairness or team performance patterns.
 
-This vignette introduces the main functionality and demonstrates typical workflows for analyzing game data, referee tendencies, and free throw accuracy over game segments.
+A college basketball game is typically officiated by **three referees**, who rotate between lead, center, and trail positions. Referees have a major impact: if a player accumulates **five fouls**, they are disqualified from the game, so inconsistency in officiating can significantly affect outcomes.
+
+**Free throws** are awarded for fouls and are taken without defensive pressure — often in high-pressure moments — and are especially influenced by the game environment (e.g., noisy crowds at home arenas).
+
 
 > GitHub Repository: <https://github.com/mayaparker/bbinsightsr>
 
@@ -38,6 +41,8 @@ The package includes `usu_data`, a dataset containing five seasons of play-by-pl
 ``` {r}
 head(usu_data)
 ```
+Each row represents an event, such as a shot, foul, or free throw, and includes metadata like the team, time, and player involved.
+
 # Referee Analysis
 
 ## Generate Referee Statistics
@@ -49,6 +54,8 @@ stats <- refstats(usu_data, team_name = "Utah State")
 head(stats)
 ```
 
+This shows how balanced or biased a referee may be towards a team as well as overall fouls called. A foul ratio near 1 indicates neutrality, while a skewed value may warrant closer review. 
+
 ## Visualize Referee Tendencies
 
 The `plot_refstats()` function can be used to visualize the most active referees and how they interact with your team of interest:
@@ -57,12 +64,15 @@ The `plot_refstats()` function can be used to visualize the most active referees
 plot_refstats(stats, top_n = 5, team_label = "Utah State")
 ```
 
+These bar charts show the five referees with the most fouls in Utah State games, most fouls against each team, and highest fouls ratios against Utah State. 
+
 # Free Throw Analysis
+
+The free throw analysis functions provide insights in free throws made during the first vs. second half. This can inform a team if the student section impacts free throws made when facing opposing teams.
 
 ## Opponent Comparison
 
-Analyze free throw accuracy by half for two specific teams:
-
+The ft_opponent function produces a side-by-side free throw percentage comparison by half for each team.
 
 ``` {r}
 ft_opponent(
@@ -72,10 +82,12 @@ ft_opponent(
   arena = "Dee Glen Smith Spectrum"
 )
 ```
+
+This shows the free throw summary between Utah State and Boise St. The t-test shows that there is not a significant difference between the free throws made in each half for Boise st however it is significant for Utah State. 
+
 ## Arena-Based Analysis
 
-Assess home and opponent free throw trends at a given arena:
-
+The ft_stadium function analyzes cumulative free throw percentages for home and away teams in a specific arena over many games.
 
 ``` {r}
 ft_stadium(
@@ -85,11 +97,13 @@ ft_stadium(
 )
 ```
 
+This example shows average free throws made for the 1st half and second half in the Utah State home stadium. It shows that there is not a significant difference between them. 
+
 # Game Trends
 
-Use `plot_game_trends()` to visualize scoring or stat patterns across game segments like timeouts:
+The `plot_game_trends()` plots a desired statistic across a desired segment of the game, by breaking the game up between timeouts, halves, or splitting the game into a specific number of segments. This shows the trends of the desired statistic throughout the game.
 
-``` {r}
+``` {r fig.width = 9, fig.height = 5}
 plot_game_trends(
   games      = usu_data,
   home_team  = "Utah State",
@@ -99,6 +113,7 @@ plot_game_trends(
   game_date  = "2023-01-10"
 )
 ```
+This example plots the number of points between each timeout for the Utah State vs. Wyoming game on January 10th 2023 allowing the user to look for trends and scoring throughout the game for each team. 
 
 # Conclusion
 
