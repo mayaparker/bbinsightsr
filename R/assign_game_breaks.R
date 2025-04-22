@@ -81,8 +81,11 @@ assign_game_breaks <- function(game_data, segment_by = c("half", "timeout",
       seg_id[last_index:(i - 1)] <- cur_seg
       seg_id[i] <- cur_seg
       game_data$game_break[i] <- TRUE
-      game_data$game_break_label[i] <- paste0(game_data$description[i], "
-                        (", format_mmss(game_data$time_remaining_half[i]), ")")
+      game_data$game_break_label[i] <- paste0(
+        trimws(game_data$description[i]), " (",
+        format_mmss(game_data$time_remaining_half[i]), ")"
+      )
+
       cur_seg <- cur_seg + 1L
       last_index <- i + 1L
     }

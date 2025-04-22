@@ -85,13 +85,14 @@
 #' head(ids)
 "ids"
 
-#' Team Name Conversion Dictionary (from ncaahoopR)
+#' Team Name Conversion Dictionary (from ncaahoopR) with added column to
+#' address some common naming errors
 #'
 #' A lookup table of team name formats across major NCAA basketball data
 #'   sources.
 #'
 #' @docType data
-#' @format A data frame with 9 columns:
+#' @format A data frame with 10 columns:
 #' \describe{
 #'   \item{NCAA}{Team name as listed on the NCAA website}
 #'   \item{ESPN}{Team name as listed in ESPN URLs}
@@ -102,8 +103,9 @@
 #'   \item{conference}{The team's conference}
 #'   \item{sref_link}{Slug for the team on sports-reference.com}
 #'   \item{sref_name}{Team name on sports-reference.com}
+#'   \item{short_name}{Abbreviated team name (e.g., "Boise St"
+#'   instead of "Boise State")}
 #' }
-#'
 #' @details
 #' Useful for converting team names between different systems and data sources.
 #'
@@ -111,9 +113,9 @@
 #'   the [`ncaahoopR`](https://github.com/lbenz730/ncaahoopR) package by
 #'   Luke Benz.
 #' @examples
-#' data(dict)
-#' head(dict)
-"dict"
+#' data(dictionary)
+#' head(dictionary)
+"dictionary"
 
 #' NCAA Team Color Reference Table (from ncaahoopR)
 #'

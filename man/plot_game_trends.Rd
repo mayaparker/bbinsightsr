@@ -19,9 +19,13 @@ plot_game_trends(
 \arguments{
 \item{games}{A data frame of play-by-play data for one or more games.}
 
-\item{home_team}{A string giving the home team's full name.}
+\item{home_team}{A string giving the home team's full name.
+Must match a name in the \code{dictionary} dataset
+(columns: NCAA, ESPN, ESPN_PBP, short_name).}
 
-\item{away_team}{A string giving the away team's full name.}
+\item{away_team}{A string giving the away team's full name.
+Must match a name in the \code{dictionary} dataset
+(columns: NCAA, ESPN, ESPN_PBP, short_name).}
 
 \item{game_break}{A string indicating the segmentation method. One of
 \code{"timeout"}, \code{"half"}, or \code{"num_breaks"}.}

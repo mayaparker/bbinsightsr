@@ -47,7 +47,7 @@ plot_stat_by_segment <- function(summary_data) {
   }
 
   # 3. Build ESPN_PBP → abbreviation lookup
-  abbrv_lookup <- dict %>%
+  abbrv_lookup <- dictionary %>%
     filter(ESPN_PBP %in% teams) %>%
     select(ESPN_PBP, ESPN) %>%
     deframe()

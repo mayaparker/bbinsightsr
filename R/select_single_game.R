@@ -68,8 +68,9 @@ select_single_game <- function(data, team, opponent, game_date = NULL) {
 
   repeat {
     flush.console()
-    selected_index <- as.integer(readline(prompt = "Enter the number of the
-                                          game you'd like to use: "))
+    selected_index <-
+      as.integer(readline(prompt =
+                            "Enter the number of the game you'd like to use: "))
     if (!is.na(selected_index) && selected_index >= 1 && selected_index <=
           nrow(unique_games)) {
       break

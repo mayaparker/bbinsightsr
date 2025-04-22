@@ -1,3 +1,4 @@
+utils::globalVariables("dictionary")
 #' Plot Game Trends by Segment
 #'
 #' Plots a selected statistic (e.g., points, fouls, turnovers) for a single game
@@ -6,7 +7,11 @@
 #'
 #' @param games A data frame of play-by-play data for one or more games.
 #' @param home_team A string giving the home team's full name.
+#'   Must match a name in the `dictionary` dataset
+#'   (columns: NCAA, ESPN, ESPN_PBP, short_name).
 #' @param away_team A string giving the away team's full name.
+#'   Must match a name in the `dictionary` dataset
+#'   (columns: NCAA, ESPN, ESPN_PBP, short_name).
 #' @param game_break A string indicating the segmentation method. One of
 #'   `"timeout"`, `"half"`, or `"num_breaks"`.
 #' @param stat The statistic to plot. One of:
@@ -65,6 +70,39 @@ plot_game_trends <- function(
     game_date = NULL) {
   game_break <- match.arg(game_break)
   stat <- match.arg(stat)
+
+  # Helper to map input to official ESPN name
+  resolve_team_name <- function(input_name) {
+    match_row <- dictionary[
+      apply(dictionary, 1, function(row) input_name %in% row),
+    ]
+    if (nrow(match_row) == 0) {
+      stop(
+        glue::glue(
+          "Team '{input_name}' not recognized. Please use a known name from one
+          of these columns in `dictionary`:\n",
+          "  - NCAA\n  - ESPN\n  - ESPN_PBP\n  - short_name\n\n",
+          "You can run `View(dictionary)` to explore valid team names."
+        )
+      )
+    }
+    match_row$ESPN[1]
+  }
+
+  # Resolve input team names to ESPN standard
+  home_team <- resolve_team_name(home_team)
+  away_team <- resolve_team_name(away_team)
+
+  # Update any rows in the data where the team name appears in other formats
+  for (col in c("home", "away", "action_team", "shot_team", "possession_before",
+                "possession_after")) {
+    if (col %in% colnames(games)) {
+      matches <- games[[col]] %in% dictionary$short_name
+      matched_indices <- match(games[[col]][matches], dictionary$short_name)
+      games[[col]][matches] <- dictionary$ESPN[matched_indices]
+    }
+  }
+
 
   selected_game <- select_single_game(
     data      = games,
