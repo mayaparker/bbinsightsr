@@ -43,7 +43,7 @@ select_single_game <- function(data, team, opponent, game_date = NULL) {
         " on ", format(as.Date(date_filtered$date[1]), "%b %d, %Y")
       )
       return(game_matches |> dplyr::filter(game_id ==
-                                              date_filtered$game_id[1]))
+                                             date_filtered$game_id[1]))
     } else {
       message("No game found on ", as.character(game_date),
               " between these teams.")

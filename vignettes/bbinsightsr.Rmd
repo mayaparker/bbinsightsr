@@ -21,7 +21,7 @@ This vignette introduces the main functionality and demonstrates typical workflo
 Install the development version from GitHub using `pak`:
 
 ``` {r, eval=FALSE, echo=TRUE}
-# install.packages("pak")
+install.packages("pak")
 pak::pak("mayaparker/bbinsightsr")
 ```
 
