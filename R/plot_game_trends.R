@@ -93,15 +93,18 @@ plot_game_trends <- function(
   home_team <- resolve_team_name(home_team)
   away_team <- resolve_team_name(away_team)
 
-  # Update any rows in the data where the team name appears in other formats
-  for (col in c("home", "away", "action_team", "shot_team", "possession_before",
-                "possession_after")) {
+  # Normalize team names in the dataset by replacing any match with ESPN name
+  for (col in c("home", "away", "action_team", "shot_team",
+                "possession_before", "possession_after")) {
     if (col %in% colnames(games)) {
-      matches <- games[[col]] %in% dictionary$short_name
-      matched_indices <- match(games[[col]][matches], dictionary$short_name)
-      games[[col]][matches] <- dictionary$ESPN[matched_indices]
+      for (i in seq_len(nrow(dictionary))) {
+        row_vals <- unlist(dictionary[i, c("NCAA", "ESPN", "ESPN_PBP", "short_name")])
+        espn_name <- dictionary$ESPN[i]
+        games[[col]][games[[col]] %in% row_vals] <- espn_name
+      }
     }
   }
+
 
 
   selected_game <- select_single_game(
